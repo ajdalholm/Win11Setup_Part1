@@ -14,7 +14,7 @@ Quickly get a new windows 11 setup the way I like it.
     ```
 1. Install common applications
    ```powershell
-   PushLocation -Path (Join-Path -Path $env:USERPROFILE -ChildPath Windows11Setup)
+   Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Windows11Setup)
    $CommonApps = get-content -path .\CommonApps.json | convertfrom-json
    $CommonApps | foreach-object {
     Write-Host "Installing $($_.Name)"
