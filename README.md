@@ -49,8 +49,7 @@ Quickly get a new windows 11 setup the way I like it.
    $Apps | foreach-object {
     Write-Host "Installing $($_.Name)"
     if ($_.Override -ne $null) {
-        #& winget install --accept-package-agreements --accept-source-agreements --exact --silent --override "$($_.Override)" $_.ID
-        write-information "winget install --accept-package-agreements --accept-source-agreements --exact --silent --override $($_.Override) $($_.ID)" -InformationAction Continue
+        & winget install --accept-package-agreements --accept-source-agreements --exact --silent --override $($ExecutionContext.InvokeCommand.ExpandString($_.Override)) $_.ID
     } else {
         & winget install --accept-package-agreements --accept-source-agreements --exact --silent $_.ID
     }
