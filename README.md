@@ -22,4 +22,7 @@ Quickly get a new windows 11 setup the way I like it.
     Write-Host "Installing $($_.Name)"
     & winget install $_.ID
    }
+   #Refresh Path
+   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")  
+    
    ```
