@@ -32,7 +32,11 @@ Quickly get a new windows 11 setup the way I like it.
    $Apps = get-content -path .\CommonApps.json | convertfrom-json
    $Apps | foreach-object {
     Write-Host "Installing $($_.Name)"
-    & winget install --accept-package-agreements --accept-source-agreements --exact --silent -q $_.ID
+    if ($_.Override -ne $null) {
+        & winget install --accept-package-agreements --accept-source-agreements --exact --silent --override "$($_.Override)" $_.ID
+    } else {
+        & winget install --accept-package-agreements --accept-source-agreements --exact --silent $_.ID
+    }
    }
    #Refresh Path
    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")  
@@ -44,7 +48,12 @@ Quickly get a new windows 11 setup the way I like it.
    $Apps = get-content -path .\DeveloperApps.json | convertfrom-json
    $Apps | foreach-object {
     Write-Host "Installing $($_.Name)"
-    & winget install --accept-package-agreements --accept-source-agreements --exact --silent -q $_.ID
+    if ($_.Override -ne $null) {
+        #& winget install --accept-package-agreements --accept-source-agreements --exact --silent --override "$($_.Override)" $_.ID
+        write-information "winget install --accept-package-agreements --accept-source-agreements --exact --silent --override $($_.Override) $($_.ID)" -InformationAction Continue
+    } else {
+        & winget install --accept-package-agreements --accept-source-agreements --exact --silent $_.ID
+    }
    }
    #Refresh Path
    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")  
