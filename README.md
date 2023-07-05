@@ -14,13 +14,37 @@ Quickly get a new windows 11 setup the way I like it.
     #Set execution policy to RemoteSigned
     Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
     ```
+1. Remove unwanted applications
+   ```powershell
+   Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Windows11Setup)
+   $Apps = get-content -path .\UnwantedApps.json | convertfrom-json
+   $Apps | foreach-object {
+    Write-Host "Removing $($_.Name)"
+    & winget uninstall $_.ID
+   }
+   #Refresh Path
+   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")  
+    
+   ```
 1. Install common applications
    ```powershell
    Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Windows11Setup)
-   $CommonApps = get-content -path .\CommonApps.json | convertfrom-json
-   $CommonApps | foreach-object {
+   $Apps = get-content -path .\CommonApps.json | convertfrom-json
+   $Apps | foreach-object {
     Write-Host "Installing $($_.Name)"
-    & winget install $_.ID
+    & winget install --accept-package-agreements --accept-source-agreements --exact --silent -q $_.ID
+   }
+   #Refresh Path
+   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")  
+    
+   ```
+1. Install developer applications
+   ```powershell
+   Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Windows11Setup)
+   $Apps = get-content -path .\DeveloperApps.json | convertfrom-json
+   $Apps | foreach-object {
+    Write-Host "Installing $($_.Name)"
+    & winget install --accept-package-agreements --accept-source-agreements --exact --silent -q $_.ID
    }
    #Refresh Path
    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")  
