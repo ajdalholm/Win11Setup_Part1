@@ -1,6 +1,7 @@
 [
     {
       "ID": "Microsoft.VisualStudio.2022.Community",
-      "Name": "Visual Studio Community 2022"
+      "Name": "Visual Studio Community 2022",
+      "Override": "--passive --config $($pwd)\\Microsoft.VisualStudio.2022.Community.vsconf"
     }
-  ]
+]
