@@ -1,0 +1,66 @@
+[
+    {
+        "ID": "microsoft.windowscommunicationsapps_8wekyb3d8bbwe",
+        "Name": "Mail and Calendar"
+      },
+      {
+        "ID": "Microsoft.BingNews_8wekyb3d8bbwe",
+        "Name": "Microsoft News"
+      },
+      {
+        "ID": "Microsoft.BingWeather_8wekyb3d8bbwe",
+        "Name": "MSN Weather"
+      },
+      {
+        "ID": "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe",
+        "Name": "Microsoft Solitaire Collection"
+      },
+      {
+        "ID": "Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe",
+        "Name": "Office"
+      },
+      {
+        "ID": "Microsoft.People_8wekyb3d8bbwe",
+        "Name": "Microsoft People"
+      },
+      {
+        "ID": "Microsoft.WindowsMaps_8wekyb3d8bbwe",
+        "Name": "Windows Maps"
+      },
+      {
+        "ID": "Microsoft.Xbox.TCUI_8wekyb3d8bbwe",
+        "Name": "Xbox TCUI"
+      },
+      {
+        "ID": "Microsoft.XboxGameOverlay_8wekyb3d8bbwe",
+        "Name": "Xbox Game Bar Plugin"
+      },
+      {
+        "ID": "Microsoft.XboxGamingOverlay_8wekyb3d8bbwe",
+        "Name": "Xbox Game Bar"
+      },
+      {
+        "ID": "Microsoft.XboxIdentityProvider_8wekyb3d8bbwe",
+        "Name": "Xbox Identity Provider"
+      },
+      {
+        "ID": "Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe",
+        "Name": "Xbox Game Speech Window"
+      },
+      {
+        "ID": "MicrosoftTeams_8wekyb3d8bbwe",
+        "Name": "Microsoft Teams"
+      },
+      {
+        "ID": "WinMerge_83g614hpn1ttr",
+        "Name": "WinMerge"
+      },
+      {
+        "ID": "Microsoft.GamingApp_8wekyb3d8bbwe",
+        "Name": "Xbox"
+      },
+      {
+        "ID": "Clipchamp.Clipchamp_yxz26nhyzhsrt",
+        "Name": "pchamp"
+      }
+]
