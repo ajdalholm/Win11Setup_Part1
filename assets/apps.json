@@ -194,5 +194,10 @@
         "Name":"Logi Options+",
         "ID":"Logitech.OptionsPlus",
         "Category":"common"
-      }
+      },
+      {
+        "Name":"Calibre",
+        "ID":"calibre.calibre",
+        "Category":"additional"
+      }      
   ]
