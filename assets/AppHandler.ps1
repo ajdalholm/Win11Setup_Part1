@@ -35,6 +35,15 @@ $Apps | foreach-object {
             Write-Information "Tolerated app $($CurrentApp.Name)" -InformationAction Continue
             break;
         }
+        "additional" {
+            #These are apps I tolerate having on the system.
+            #For now nothing is to be done with this.. But in the future
+            #this list should be compared to actualle installed apps
+            Write-Information "Installing additional app $($CurrentApp.Name)" -InformationAction Continue
+            Write-Information "winget $Argumentlist" -InformationAction Continue
+            & winget $Argumentlist
+            break;
+        }
         Default {
             Write-Error "Unhandled category: $($CurrentApp.Category) - please fix in code or configuration" -ErrorAction Continue
         }
