@@ -9,9 +9,11 @@ Quickly get a new windows 11 setup the way I like it.
             Select-Object -ExpandProperty "assets" |
             Where-Object "browser_download_url" -Match '.msixbundle' |
             Select-Object -ExpandProperty "browser_download_url"
+    $ProgressPreference='SilentlyContinue'
     Invoke-WebRequest -Uri $URL -OutFile "Setup.msix" -UseBasicParsing
-    Add-AppxPackage -Path "Setup.msix" #install
-    Remove-Item "Setup.msix" #remove installer
+    $ProgressPreference='Continue'
+    Add-AppxPackage -Path "Setup.msix" -ForceApplicationShutdown #install
+    Remove-Item "Setup.msix" -Confirm #remove installer
 
     #install git
     winget install Git.Git --accept-package-agreements --accept-source-agreements
