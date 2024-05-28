@@ -1,21 +1,12 @@
 # Windows11Setup
 Quickly get a new windows 11 setup the way I like it.
 
-1. Install git
+1. Install WinGet
+    ```powershell
+    (Invoke-WebRequest -Uri https://gist.github.com/ajdalholm/d5ec667f5ecf77dff5e85dbfa3ca15aa/raw).content | Invoke-Expression
+    ```
+2. Install git
     ```powershell 
-    # Install winget
-    $URL = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
-    $URL = (Invoke-WebRequest -Uri $URL).Content | ConvertFrom-Json |
-            Select-Object -ExpandProperty "assets" |
-            Where-Object "browser_download_url" -Match '.msixbundle' |
-            Select-Object -ExpandProperty "browser_download_url"
-    $ProgressPreference='SilentlyContinue'
-    Invoke-WebRequest -Uri $URL -OutFile "Setup.msix" -UseBasicParsing
-    $ProgressPreference='Continue'
-    Add-AppxPackage -Path "Setup.msix" -ForceApplicationShutdown #install
-    Remove-Item "Setup.msix" -Confirm #remove installer
-
-    #install git
     winget install Git.Git --accept-package-agreements --accept-source-agreements
     #Refresh Path
     Invoke-Command -ScriptBlock {$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
