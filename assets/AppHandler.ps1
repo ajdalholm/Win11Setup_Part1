@@ -1,4 +1,4 @@
-Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Windows11Setup)
+Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Win11Setup_Part1)
 $Apps = get-content -path .\assets\Apps.json | convertfrom-json
 $Apps | foreach-object {
     $CurrentApp = $_
