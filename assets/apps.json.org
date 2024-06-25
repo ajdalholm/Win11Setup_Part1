@@ -1,11 +1,5 @@
 [
     {
-        "ID":"Microsoft.VisualStudio.2022.Community",
-        "Name":"Visual Studio Community 2022",
-        "Override":"--passive --config $($pwd)\\assets\\Microsoft.VisualStudio.2022.Community.vsconf",
-        "Category":"developer"
-    },
-    {
         "ID":"Microsoft.Edge",
         "Name":"Microsoft Edge",
         "Category":"tolerated"
@@ -33,11 +27,6 @@
     {
       "ID":"WireGuard.WireGuard",
       "Name":"WireGuard",
-      "Category":"common"
-    },
-    {
-      "ID":"MarkText.MarkText",
-      "Name":"Mark Text",
       "Category":"common"
     },
     {
