@@ -2,7 +2,6 @@
 Quickly get a new windows 11 setup the way I like it.
 
 1. Install WinGet and default packages
-1. Install WinGet and default packages
     ```powershell
     (Invoke-WebRequest -Uri https://gist.github.com/ajdalholm/d5ec667f5ecf77dff5e85dbfa3ca15aa/raw).content | Invoke-Expression
     #Refresh Path
