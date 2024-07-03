@@ -130,18 +130,21 @@ Quickly get a new windows 11 setup the way I like it.
 
     #Disable Taskbar widgets
     Write-Verbose "Disabling taskbar widgets" -Verbose
-        if ( -not (Test-Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh") ) {
-        New-Item -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft" -Name 'Dsh'
+        if ( -not (Test-Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced") ) {
+        New-Item -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer" -Name 'Advanced'
     }
-    if ( -not (Get-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh" -Name 'AllowNewsAndInterests' -ErrorAction SilentlyContinue) ) {
-        $null = New-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh" -Name 'AllowNewsAndInterests' -Type 'string' -Value 0
+    if ( -not (Get-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'TaskbarDa' -ErrorAction SilentlyContinue) ) {
+        $null = New-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'TaskbarDa' -Type 'string' -Value 0
     } else {
-        Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh" -Name 'AllowNewsAndInterests' -Value 0
+        Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'TaskbarDa' -Value 0
     }
 
-
-    
-
-
+    #Disable Task View on taskbar
+    Write-Verbose "Disabling Task View on taskbar" -Verbose
+    if ( -not (Get-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'ShowTaskViewButton' -ErrorAction SilentlyContinue) ) {
+        $null = New-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'ShowTaskViewButton' -Type 'string' -Value 0
+    } else {
+        Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'ShowTaskViewButton' -Value 0
+    }
 
    ```
