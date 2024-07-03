@@ -97,7 +97,7 @@ Quickly get a new windows 11 setup the way I like it.
         New-Item -Path "HKCU:\\Software\\Classes\\CLSID" -Name '{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}'
     }
     if ( -not (Test-Path -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32") ) {
-        New-Item -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Name 'InprocServer32'
+        New-Item -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Name 'InprocServer32' -Value ""
     }
     Write-Information "Legacy right-click context menu will be in effect after a restart" -InformationAction Continue
 
