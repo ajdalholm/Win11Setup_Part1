@@ -115,19 +115,32 @@ Quickly get a new windows 11 setup the way I like it.
 
     #Mouse acceleration
     Write-Verbose "Enabling mouse acceleration" -Verbose
-    if ( -not (Get-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -ErrorAction SilentlyContinue) ) {
-        $null = New-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -Type 'string' -Value 1
+    if ( -not (Get-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -ErrorAction SilentlyContinue) ) {
+        $null = New-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -Type 'string' -Value 1
     } else {
-        Set-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -Value 1  
+        Set-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -Value 1  
     }
 
     #Disable Stick Key
-    Write-Verbose "Disabling sticky key"
+    Write-Verbose "Disabling sticky key" -Verbose
     $StickyKeyFlag = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\StickyKeys" -Name 'Flags').Flags -bxor 4
     Set-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\StickyKeys" -Name 'Flags' -Value $StickyKeyFlag
     $KeyboardResponse = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\Keyboard Response" -Name 'Flags').Flags -bxor 4
     Set-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\Keyboard Response" -Name 'Flags' -Value $KeyboardResponse
 
+    #Disable Taskbar widgets
+    Write-Verbose "Disabling taskbar widgets" -Verbose
+        if ( -not (Test-Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh") ) {
+        New-Item -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft" -Name 'Dsh'
+    }
+    if ( -not (Get-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh" -Name 'AllowNewsAndInterests' -ErrorAction SilentlyContinue) ) {
+        $null = New-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh" -Name 'AllowNewsAndInterests' -Type 'string' -Value 0
+    } else {
+        Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh" -Name 'AllowNewsAndInterests' -Value 0
+    }
+
+
+    
 
 
 
