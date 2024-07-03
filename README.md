@@ -107,7 +107,7 @@ Quickly get a new windows 11 setup the way I like it.
     #Enable NumLock
     Write-Verbose "Enabling NumLock" -Verbose
     $InitialKeyboardIndicators = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name 'InitialKeyboardIndicators').InitialKeyboardIndicators -bor 2
-    Set-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name InitialKeyboardIndicators -Value $InitialKeyboardIndicators
+    Set-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name 'InitialKeyboardIndicators' -Value $InitialKeyboardIndicators
 
     #Show file extensions
     Write-Verbose "Show file extensions in explorer" -Verbose
@@ -120,4 +120,15 @@ Quickly get a new windows 11 setup the way I like it.
     } else {
         Set-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -Value 1  
     }
+
+    #Disable Stick Key
+    Write-Verbose "Disabling sticky key"
+    $StickyKeyFlag = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\StickyKeys" -Name 'Flags').Flags -bxor 4
+    Set-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\StickyKeys" -Name 'Flags' -Value $StickyKeyFlag
+    $KeyboardResponse = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\Keyboard Response" -Name 'Flags').Flags -bxor 4
+    Set-ItemProperty -Path "HKCU:\\Control Panel\\Accessibility\\Keyboard Response" -Name 'Flags' -Value $KeyboardResponse
+
+
+
+
    ```
