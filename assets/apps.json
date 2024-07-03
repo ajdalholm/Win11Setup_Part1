@@ -160,6 +160,31 @@
         "Category":"unwanted"
       },
       {
+        "Name":"Outlook for Windows",
+        "ID":"Microsoft.OutlookForWindows_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Web Search from Microsoft Bing",
+        "ID":"Microsoft.BingSearch_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Phone Link",
+        "ID":"Microsoft.YourPhone_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"EU Waste Recycling Information",
+        "ID":"{42DF7152-0B7D-7917-4633-94E00C7BE684}",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Microsoft Office Professional Plus 2021 - en-us",
+        "ID":"ProPlus2021Retail - en-us",
+        "Category":"tolerated"
+      },
+      {
         "Name":"NVIDIA Control Panel",
         "ID":"NVIDIACorp.NVIDIAControlPanel_56jybvy8sckqj",
         "Category":"tolerated"
