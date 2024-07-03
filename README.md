@@ -108,4 +108,16 @@ Quickly get a new windows 11 setup the way I like it.
     Write-Verbose "Enabling NumLock" -Verbose
     $InitialKeyboardIndicators = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name 'InitialKeyboardIndicators').InitialKeyboardIndicators -bor 2
     Set-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name InitialKeyboardIndicators -Value $InitialKeyboardIndicators
+
+    #Show file extensions
+    Write-Verbose "Show file extensions in explorer" -Verbose
+    Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'HideFileExt' -Value 0
+
+    #Mouse acceleration
+    Write-Verbose "Enabling mouse acceleration" -Verbose
+    if ( -not (Get-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -ErrorAction SilentlyContinue) ) {
+        $null = New-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -Type 'string' -Value 1
+    } else {
+        Set-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed2' -Value 1  
+    }
    ```
