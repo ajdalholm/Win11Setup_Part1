@@ -91,5 +91,17 @@ Quickly get a new windows 11 setup the way I like it.
         New-Item -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Name 'InprocServer32'
     }
     Write-Information "Legacy right-click context menu will be in effect after a restart" -InformationAction Continue
-    
+
+    #Disable IPv6
+    Write-Verbose "Disabling IPv6" -Verbose
+    Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters" -Name 'DisabledComponents' -Value '255' -Type 'DWord'
+
+    #Disable Bing search in startmenu
+    Write-Verbose "Disabling Bing search in startmenu" -Verbose
+    if ( -not (Test-Path "HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer") ) {
+        New-Item -Path "HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows" -Name 'Explorer'
+    }
+    Set-ItemProperty -Path "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer" -Name "DisableSearchBoxSuggestions" -Type "DWord" -Value "1"
+    Write-Information "Bing search in start menu will be disabled after a restart" -InformationAction Continue
+
    ```
