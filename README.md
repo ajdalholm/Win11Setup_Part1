@@ -84,5 +84,12 @@ Quickly get a new windows 11 setup the way I like it.
     }
     Set-ItemProperty -Path "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer" -Name "DisableNotificationCenter" -Type "DWord" -Value "1"
     Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications" -Name "ToastEnabled" -Type "DWord" -Value "0"
+
+    #Legacy Right-Click Menu
+    Write-Verbose "Enabling legacy right-click context Menu" -Verbose
+    if ( -not (Test-Path -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32") ) {
+        New-Item -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Name 'InprocServer32'
+    }
+    Write-Information "Legacy right-click context menu will be in effect after a restart" -InformationAction Continue
     
    ```
