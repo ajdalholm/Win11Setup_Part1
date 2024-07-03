@@ -84,4 +84,5 @@ Quickly get a new windows 11 setup the way I like it.
     }
     Set-ItemProperty -Path "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer" -Name "DisableNotificationCenter" -Type "DWord" -Value "1"
     Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications" -Name "ToastEnabled" -Type "DWord" -Value "0"
+    
    ```
