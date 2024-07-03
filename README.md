@@ -104,4 +104,8 @@ Quickly get a new windows 11 setup the way I like it.
     Set-ItemProperty -Path "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer" -Name "DisableSearchBoxSuggestions" -Type "DWord" -Value "1"
     Write-Information "Bing search in start menu will be disabled after a restart" -InformationAction Continue
 
+    #Enable NumLock
+    Write-Verbose "Enabling NumLock" -Verbose
+    $InitialKeyboardIndicators = (Get-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name 'InitialKeyboardIndicators').InitialKeyboardIndicators -bor 2
+    Set-ItemProperty -Path "HKCU:\\Control Panel\\Keyboard" -Name InitialKeyboardIndicators -Value $InitialKeyboardIndicators
    ```
