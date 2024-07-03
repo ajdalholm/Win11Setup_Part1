@@ -14,13 +14,19 @@ Quickly get a new windows 11 setup the way I like it.
     winget install Git.Git 7zip.7zip Google.Chrome Microsoft.VisualStudioCode Microsoft.PowerShell WireGuard.WireGuard WinMerge.WinMerge RaspberryPiFoundation.RaspberryPiImager --accept-package-agreements --accept-source-agreements
     #Refresh Path
     Invoke-Command -ScriptBlock {$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
-
     ```
 1. Configure Powershell
     ```powershell
     #Set execution policy to RemoteSigned
     Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
-
+    ```
+1. Clone git repository
+    ```powershell 
+    ```
+1. Configure Powershell
+    ```powershell
+    #Set execution policy to RemoteSigned
+    Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
     ```
 1. Clone git repository
     ```powershell 
@@ -28,7 +34,6 @@ Quickly get a new windows 11 setup the way I like it.
     Invoke-Command -ScriptBlock {powershell.exe -Command "& {Push-Location $env:USERPROFILE ; & 'git.exe' clone https://github.com/ajdalholm/Win11Setup_Part1; Pop-Location}"}
     #Prompt for gitconfig configuration
     Invoke-Command -ScriptBlock {powershell.exe -Command "& {Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Win11Setup_Part1) -ErrorAction Stop; Copy-Item -Path ./Assets/.gitconfig -Destination $env:USERPROFILE; Pop-Location}"}
-
     ```
 1. Windows configuration
    ```powershell
@@ -60,7 +65,14 @@ Quickly get a new windows 11 setup the way I like it.
 
     #Enable End Task with right click
     Write-Verbose "Enabling rigth-click End Task" -Verbose
-    Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name "TaskbarEndTask" -Type "DWord" -Value "1"
+    if ( -not (Test-Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings") ) {
+        New-Item -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Name 'TaskbarDeveloperSettings'
+    }
+    if ( -not (Get-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -ErrorAction SilentlyContinue) ) {
+        $null = New-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -Type 'string' -Value 1
+    } else {
+        Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -Value 1  
+    }
 
     #Disable Storage Sense
     Write-Verbose "Disabling Storage Sense" -Verbose
@@ -81,6 +93,9 @@ Quickly get a new windows 11 setup the way I like it.
 
     #Legacy Right-Click Menu
     Write-Verbose "Enabling legacy right-click context Menu" -Verbose
+    if ( -not (Test-Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}") ) {
+        New-Item -Path "HKCU:\\Software\\Classes\\CLSID" -Name '{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}'
+    }
     if ( -not (Test-Path -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32") ) {
         New-Item -Path "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Name 'InprocServer32'
     }
