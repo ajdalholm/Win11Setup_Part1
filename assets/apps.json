@@ -1,8 +1,192 @@
 [
     {
-        "ID":"Microsoft.VisualStudio.2022.Community",
-        "Name":"Visual Studio Community 2022",
-        "Override":"--passive --config $($pwd)\\assets\\Microsoft.VisualStudio.2022.Community.vsconf",
-        "Category":"developer"
-    }   
+        "ID":"Microsoft.Edge",
+        "Name":"Microsoft Edge",
+        "Category":"tolerated"
+    },
+    {
+      "ID":"7zip.7zip",
+      "Name":"7-Zip",
+      "Category":"common"
+    },
+    {
+      "ID":"Google.Chrome",
+      "Name":"Google Chrome",
+      "Category":"common"
+    },
+    {
+      "ID":"Microsoft.VisualStudioCode",
+      "Name":"Microsoft Visual Studio Code",
+      "Category":"common"
+    },
+    {
+      "ID":"Microsoft.PowerShell",
+      "Name":"PowerShell",
+      "Category":"common"
+    },
+    {
+      "ID":"WireGuard.WireGuard",
+      "Name":"WireGuard",
+      "Category":"common"
+    },
+    {
+      "ID":"WinMerge.WinMerge",
+      "Name":"WinMerge",
+      "Category":"common"
+    },
+      {
+        "ID":"microsoft.windowscommunicationsapps_8wekyb3d8bbwe",
+        "Name":"Mail and Calendar",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.BingNews_8wekyb3d8bbwe",
+        "Name":"Microsoft News",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.BingWeather_8wekyb3d8bbwe",
+        "Name":"MSN Weather",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe",
+        "Name":"Microsoft Solitaire Collection",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe",
+        "Name":"Office",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.People_8wekyb3d8bbwe",
+        "Name":"Microsoft People",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.WindowsMaps_8wekyb3d8bbwe",
+        "Name":"Windows Maps",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.Xbox.TCUI_8wekyb3d8bbwe",
+        "Name":"Xbox TCUI",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.XboxGameOverlay_8wekyb3d8bbwe",
+        "Name":"Xbox Game Bar Plugin",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.XboxGamingOverlay_8wekyb3d8bbwe",
+        "Name":"Xbox Game Bar",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.XboxIdentityProvider_8wekyb3d8bbwe",
+        "Name":"Xbox Identity Provider",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe",
+        "Name":"Xbox Game Speech Window",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"MicrosoftTeams_8wekyb3d8bbwe",
+        "Name":"Microsoft Teams",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"WinMerge_83g614hpn1ttr",
+        "Name":"WinMerge",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.GamingApp_8wekyb3d8bbwe",
+        "Name":"Xbox",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Clipchamp.Clipchamp_yxz26nhyzhsrt",
+        "Name":"pchamp",
+        "Category":"unwanted"
+      },
+      {
+        "ID":"Microsoft.Edge",
+        "Name":"Microsoft Edge",
+        "Category":"tolerated"
+      },
+      {
+        "Name":"Snipping Tool",
+        "ID":"Microsoft.ScreenSketch_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Microsoft To Do",
+        "ID":"Microsoft.Todos_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Microsoft Photos",
+        "ID":"Microsoft.Windows.Photos_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Windows Clock",
+        "ID":"Microsoft.WindowsAlarms_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Windows Calculator",
+        "ID":"Microsoft.WindowsCalculator_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Windows Media Player",
+        "ID":"Microsoft.ZuneMusic_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Films & TV",
+        "ID":"Microsoft.ZuneVideo_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"Quick Assist",
+        "ID":"MicrosoftCorporationII.QuickAssist_8wekyb3d8bbwe",
+        "Category":"unwanted"
+      },
+      {
+        "Name":"NVIDIA Control Panel",
+        "ID":"NVIDIACorp.NVIDIAControlPanel_56jybvy8sckqj",
+        "Category":"tolerated"
+      },
+      {
+        "Name":"Microsoft OneDrive",
+        "ID":"Microsoft.OneDrive",
+        "Category":"common"
+      },
+      {
+        "Name":"Microsoft Office Professional Plus 2021 - da-dk",
+        "ID":"ProPlus2021Retail - da-dk",
+        "Category":"tolerated"
+      },
+      {
+        "Name":"Raspberry Pi Imager",
+        "ID":"RaspberryPiFoundation.RaspberryPiImager",
+        "Category":"common"
+      },
+      {
+        "Name":"Logi Options+",
+        "ID":"Logitech.OptionsPlus",
+        "Category":"common"
+      },
+      {
+        "Name":"Calibre",
+        "ID":"calibre.calibre",
+        "Category":"additional"
+      }      
   ]
