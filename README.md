@@ -96,6 +96,10 @@ Quickly get a new windows 11 setup the way I like it.
     Write-Verbose "Disabling IPv6" -Verbose
     Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters" -Name 'DisabledComponents' -Value '255' -Type 'DWord'
 
+    #Disable search in taskbar
+    Write-Verbose "Disabling search in taskbar" -Verbose
+    Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search" -Name "SearchboxTaskbarMode" -Value "0"
+
     #Disable Bing search in startmenu
     Write-Verbose "Disabling Bing search in startmenu" -Verbose
     if ( -not (Test-Path "HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer") ) {
