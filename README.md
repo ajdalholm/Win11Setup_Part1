@@ -1,34 +1,42 @@
 # Windows11Setup
+
 Quickly get a new windows 11 setup the way I like it.
 
 1. Install WinGet and default packages
-    ```powershell
-    (Invoke-WebRequest -Uri https://gist.github.com/ajdalholm/d5ec667f5ecf77dff5e85dbfa3ca15aa/raw).content | Invoke-Expression
-    #Refresh Path
-    Invoke-Command -ScriptBlock {$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
-    #Default packages
-    winget install Git.Git 7zip.7zip Google.Chrome Microsoft.VisualStudioCode Microsoft.PowerShell WireGuard.WireGuard WinMerge.WinMerge RaspberryPiFoundation.RaspberryPiImager --accept-package-agreements --accept-source-agreements
-    #Refresh Path
-    Invoke-Command -ScriptBlock {$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
 
-    ```
-1. Configure Powershell
-    ```powershell
-    #Set execution policy to RemoteSigned
-    Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
-    
-    ```
-1. Clone git repository
-    ```powershell 
-    #clone this repository
-    Invoke-Command -ScriptBlock {powershell.exe -Command "& {Push-Location $env:USERPROFILE ; & 'git.exe' clone https://github.com/ajdalholm/Win11Setup_Part1; Pop-Location}"}
-    #Prompt for gitconfig configuration
-    Invoke-Command -ScriptBlock {powershell.exe -Command "& {Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Win11Setup_Part1) -ErrorAction Stop; Copy-Item -Path ./Assets/.gitconfig -Destination $env:USERPROFILE; Pop-Location}"}
-
-    ```
-1. Windows configuration
    ```powershell
-   #Powersettings 
+   (Invoke-WebRequest -Uri https://gist.github.com/ajdalholm/d5ec667f5ecf77dff5e85dbfa3ca15aa/raw).content | Invoke-Expression
+   #Refresh Path
+   Invoke-Command -ScriptBlock {$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
+   #Default packages
+   winget install Git.Git 7zip.7zip Google.Chrome Microsoft.VisualStudioCode Microsoft.PowerShell WireGuard.WireGuard WinMerge.WinMerge RaspberryPiFoundation.RaspberryPiImager --accept-package-agreements --accept-source-agreements
+   #Refresh Path
+   Invoke-Command -ScriptBlock {$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
+
+   ```
+
+1. Configure Powershell
+
+   ```powershell
+   #Set execution policy to RemoteSigned
+   Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
+   install-module -Name Microsoft.WinGet.Client -Scope CurrentUser
+   ```
+
+1. Clone git repository
+
+   ```powershell
+   #clone this repository
+   Invoke-Command -ScriptBlock {powershell.exe -Command "& {Push-Location $env:USERPROFILE ; & 'git.exe' clone https://github.com/ajdalholm/Win11Setup_Part1; Pop-Location}"}
+   #Prompt for gitconfig configuration
+   Invoke-Command -ScriptBlock {powershell.exe -Command "& {Push-Location -Path (Join-Path -Path $env:USERPROFILE -ChildPath Win11Setup_Part1) -ErrorAction Stop; Copy-Item -Path ./Assets/.gitconfig -Destination $env:USERPROFILE; Pop-Location}"}
+
+   ```
+
+1. Windows configuration
+
+   ```powershell
+   #Powersettings
    Write-Verbose "Setting timeout intervals" -Verbose
    Start-Process -FilePath powercfg -ArgumentList "/change standby-timeout-ac 0" -NoNewWindow -Wait
    Start-Process -FilePath powercfg -ArgumentList "/change standby-timeout-dc 30" -NoNewWindow -Wait
@@ -36,6 +44,16 @@ Quickly get a new windows 11 setup the way I like it.
    Start-Process -FilePath powercfg -ArgumentList "/change monitor-timeout-dc 25" -NoNewWindow -Wait
    Write-Verbose "Diabling hibernation" -Verbose
    Start-Process -FilePath powercfg -ArgumentList "/hibernate off" -NoNewWindow -Wait
+
+   #Hyper-V
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
+
+   #WSL
+   Invoke-Command -ScriptBlock {wsl.exe --install}
+
+   #Docker Desktop
+   Install-WinGetPackage -Mode Silent -Id Docker.DockerDesktop 
+
 
    #HomeGroup
    Write-Verbose "Disabling HomeGroup" -Verbose
@@ -62,7 +80,7 @@ Quickly get a new windows 11 setup the way I like it.
     if ( -not (Get-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -ErrorAction SilentlyContinue) ) {
         $null = New-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -Type 'string' -Value 1
     } else {
-        Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -Value 1  
+        Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" -Name 'TaskbarEndTask' -Value 1
     }
 
     #Disable Storage Sense
@@ -122,7 +140,7 @@ Quickly get a new windows 11 setup the way I like it.
     if ( -not (Get-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -ErrorAction SilentlyContinue) ) {
         $null = New-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -Type 'string' -Value 1
     } else {
-        Set-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -Value 1  
+        Set-ItemProperty -Path "HKCU:\\Control Panel\\Mouse" -Name 'MouseSpeed' -Value 1
     }
 
     #Disable Stick Key
