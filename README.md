@@ -46,13 +46,27 @@ Quickly get a new windows 11 setup the way I like it.
    Start-Process -FilePath powercfg -ArgumentList "/hibernate off" -NoNewWindow -Wait
 
    #Hyper-V
-   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
+   $OSEdition = (Get-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion" -Name "EditionID").EditionID
+   Switch ($OSEdition)
+   {
+      {$_ -in @('Professional','Enterprise')} {
+         Write-Verbose "Enabling feature"
+         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
+      }
+      {$_ -in @('Home')} {
+         Write-Verbose "Copying files"
+      }
+      Default {
+         Write-Host "No matches"
+      }
+   }
+   
 
    #WSL
    Invoke-Command -ScriptBlock {wsl.exe --install}
 
    #Docker Desktop
-   Install-WinGetPackage -Mode Silent -Id Docker.DockerDesktop 
+   #Install-WinGetPackage -Mode Silent -Id Docker.DockerDesktop 
 
 
    #HomeGroup
