@@ -20,6 +20,9 @@ Quickly get a new windows 11 setup the way I like it.
    ```powershell
    #Set execution policy to RemoteSigned
    Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
+   Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+   Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+   Register-PSRepository -Name myrepo -SourceLocation \\nas.dalholm.net\myrepo -PublishLocation \\nas.dalholm.net\myrepo -ScriptSourceLocation \\nas.dalholm.net\myrepo -ScriptPublishLocation \\nas.dalholm.net\myrepo -InstallationPolicy Trusted
    install-module -Name Microsoft.WinGet.Client -Scope CurrentUser
    ```
 
