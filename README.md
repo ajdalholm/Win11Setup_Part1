@@ -18,11 +18,31 @@ Quickly get a new windows 11 setup the way I like it.
 1. Configure Powershell
 
    ```powershell
-   #Set execution policy to RemoteSigned
+   Write-Information -InformationAction Continue -MessageData 'Setting execution policy to RemoteSigned'
    Invoke-Command -ScriptBlock {$sh = new-object -com Shell.Application; $sh.ShellExecute('powershell', '-Command "Set-ExecutionPolicy RemoteSigned"', '', 'runas')}
+   Write-Information -InformationAction Continue -MessageData 'Installing Nuget'
    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+   Write-Information -InformationAction Continue -MessageData 'Trusting PSGallery'
    Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+   Write-Information -InformationAction Continue -MessageData 'Adding myrepo as trusted'
    Register-PSRepository -Name myrepo -SourceLocation \\nas.dalholm.net\myrepo -PublishLocation \\nas.dalholm.net\myrepo -ScriptSourceLocation \\nas.dalholm.net\myrepo -ScriptPublishLocation \\nas.dalholm.net\myrepo -InstallationPolicy Trusted
+   Write-Information -InformationAction Continue -MessageData 'Removing old builtin pester module'
+
+   $PesterDefaultModulePath = "C:\Program Files\WindowsPowerShell\Modules\Pester"
+    if (-not (Test-Path $PesterDefaultModulePath)) {
+        Write-Information -InformationAction Continue -MessageData 'Pester module not present - will not try to remove it'
+    } else {
+        $ACL = Get-Acl -Path $PesterDefaultModulePath
+        $Account = New-Object System.Security.Principal.NTAccount("Builtin\Administrators")
+        $ACL.SetOwner($Account)
+        Set-Acl -Path $PesterDefaultModulePath -AclObject $ACL
+        icacls $PesterDefaultModulePath /reset
+        #icacls $PesterDefaultModulePath /grant Administrators:'F' /inheritance:d /T
+        Remove-Item -Path $PesterDefaultModulePath -Recurse -Force -Confirm:$false
+    }
+   Write-Information -InformationAction Continue -MessageData 'Installing module Pester'
+   Install-Module -Name Pester -Repository PSGallery -Scope CurrentUser
+   Write-Information -InformationAction Continue -MessageData 'Installing module Microsoft.Winget.Client'
    install-module -Name Microsoft.WinGet.Client -Scope CurrentUser
    ```
 
